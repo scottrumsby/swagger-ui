@@ -324,7 +324,7 @@ this["Handlebars"]["templates"]["operation"] = Handlebars.template({"1":function
     + escapeExpression(((helper = (helper = helpers.parentId || (depth0 != null ? depth0.parentId : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"parentId","hash":{},"data":data}) : helper)))
     + "_"
     + escapeExpression(((helper = (helper = helpers.nickname || (depth0 != null ? depth0.nickname : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"nickname","hash":{},"data":data}) : helper)))
-    + "\">\n                    Test this endpoint\n                </h4>\n\n                <div id=\"test-"
+    + "\">\n                    Test this endpoint\n                </h4>\n\n                <div class=\"response-class\" id=\"test-"
     + escapeExpression(((helper = (helper = helpers.parentId || (depth0 != null ? depth0.parentId : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"parentId","hash":{},"data":data}) : helper)))
     + "_"
     + escapeExpression(((helper = (helper = helpers.nickname || (depth0 != null ? depth0.nickname : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"nickname","hash":{},"data":data}) : helper)))
@@ -345,7 +345,7 @@ this["Handlebars"]["templates"]["operation"] = Handlebars.template({"1":function
   buffer += "\n                </div>\n\n";
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.responseMessages : depth0), {"name":"if","hash":{},"fn":this.program(18, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "            </form>\n\n        </div>\n\n        <div class=\"samples\">\n                <span class=\"model-signature\">\n                </span>\n        </div>\n\n        <div class=\"modal\" id=\"modal-"
+  return buffer + "            </form>\n\n        </div>\n\n        <div class=\"samples\">\n                <span class=\"model-signature\">\n                    <span class=\"body-signature\">\n                    </span>\n                    <span class=\"response-signature\">\n                    </span>\n                </span>\n        </div>\n\n        <div class=\"modal\" id=\"modal-"
     + escapeExpression(((helper = (helper = helpers.parentId || (depth0 != null ? depth0.parentId : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"parentId","hash":{},"data":data}) : helper)))
     + "_"
     + escapeExpression(((helper = (helper = helpers.nickname || (depth0 != null ? depth0.nickname : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"nickname","hash":{},"data":data}) : helper)))
@@ -25270,9 +25270,10 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
   events: {
     'submit .sandbox': 'submitOperation',
     'click .submit': 'submitOperation',
-    'click  a.toggle-samples': 'toggleSamples'
+    'click  a.toggle-samples': 'toggleSamples',
 //    'mouseenter .api-ic': 'mouseEnter',
-//    'mouseout .api-ic': 'mouseExit'
+//    'mouseout .api-ic': 'mouseExit',
+    'change [name=responseContentType]' : 'showSnippet'
   },
 
   initialize: function (opts) {
@@ -25454,10 +25455,10 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
         type: "Response",
         id: this.parentId + '_' + this.nickname + '_response'
       });
-      $('.model-signature', $(this.el)).append(responseSignatureView.render().el);
+      $('.model-signature > .response-signature', $(this.el)).append(responseSignatureView.render().el);
     } else {
       this.model.responseClassSignature = 'string';
-      $('.model-signature', $(this.el)).html(this.model.type);
+      $('.model-signature > .response-signature', $(this.el)).html(this.model.type);
     }
 
     contentTypeModel = {
@@ -25499,7 +25500,7 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
       param = ref4[p];
       this.addParameter(param, contentTypeModel.consumes);
       if (param.paramType === 'body' || param.in === 'body') {
-        this.addBodyModel(param)
+        ////this.addBodyModel(param)
       }
     }
 
@@ -25515,6 +25516,8 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
       this.addStatusCode(statusCode);
     }
 
+    this.showSnippet();
+
     return this;
   },
 
@@ -25529,7 +25532,7 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
       id: this.parentId + '_' + this.nickname + '_body'
     };
     var signatureView = new SwaggerUi.Views.SignatureView({model: bodySample, tagName: 'div'});
-    $('.model-signature', $(this.el)).append(signatureView.render().el);
+    $('.model-signature > .body-signature', $(this.el)).append(signatureView.render().el);
   },
 
   parseHeadersType: function (headers) {
@@ -25607,7 +25610,8 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
       tagName: 'div',
       className: 'parameter-item',
       readOnly: this.model.isReadOnly,
-      swaggerOptions: this.options.swaggerOptions
+      swaggerOptions: this.options.swaggerOptions,
+      parentView: this
     });
     $('.operation-params', $(this.el)).append(paramView.render().el);
   },
@@ -26084,8 +26088,8 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
 
   showSnippet: function () {
     var contentTypeEl = this.$('[name=responseContentType]');
-    var xmlSnippetEl = this.$('.operation-status .snippet_xml, .response-class .snippet_xml');
-    var jsonSnippetEl = this.$('.operation-status .snippet_json, .response-class .snippet_json');
+    var xmlSnippetEl = this.$('.operation-status .snippet_xml, .response-class .snippet_xml, .model-signature > .response-signature .snippet_xml');
+    var jsonSnippetEl = this.$('.operation-status .snippet_json, .response-class .snippet_json, .model-signature > .response-signature .snippet_json');
     var contentType;
 
     if (!contentTypeEl.length) { return; }
@@ -26197,15 +26201,20 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
       sampleXML: isXML ? SwaggerUi.partials.signature.createXMLSample(schema, modelDefinitions, true) : false,
       isParam: true,
       signature: SwaggerUi.partials.signature.getParameterModelSignature(modelType, modelDefinitions),
-      defaultRendering: this.model.defaultRendering
+      defaultRendering: this.model.defaultRendering,
+      type: this.model.name,
+      id: this.options.parentView.parentId + '_' + this.options.parentView.nickname + '_' + this.model.name
     };
 
+    var modelContainer = this.modelContainer();
+    //var modelContainer = $('.model-signature', $(this.el));
+
     if (this.model.sampleJSON) {
-      var signatureView = new SwaggerUi.Views.SignatureView({model: signatureModel, tagName: 'div'});
-      $('.model-signature', $(this.el)).append(signatureView.render().el);
+      var signatureView = new SwaggerUi.Views.SignatureView({model: signatureModel, tagName: 'div', parameterView: this});
+      modelContainer.append(signatureView.render().el);
     }
     else {
-      $('.model-signature', $(this.el)).html(this.model.signature);
+      modelContainer.html(this.model.signature);
     }
 
     var isParam = false;
@@ -26265,7 +26274,11 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
 
     return this;
   },
-
+  modelContainer: function() {
+    return this.options.parentView && $('.model-signature > .body-signature', $(this.options.parentView.el)).length > 0 && (this.model.paramType === 'body' || this.model.in === 'body')
+        ? $('.model-signature > .body-signature', $(this.options.parentView.el))
+        : $('.model-signature', $(this.el));
+  },
   contains: function (consumes, type) {
     if (typeof consumes === 'string') {
       consumes = [consumes];
@@ -26292,12 +26305,15 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
   },
 
   toggleSnippet: function (type) {
+    var modelContainer = this.modelContainer();
+    var xmlSnippet = $('.snippet_xml', modelContainer);
+    var jsonSnippet = $('.snippet_json', modelContainer);
     if (type.indexOf('xml') > -1) {
-      this.$('.snippet_xml').show();
-      this.$('.snippet_json').hide();
+      xmlSnippet.show();
+      jsonSnippet.hide();
     } else {
-      this.$('.snippet_json').show();
-      this.$('.snippet_xml').hide();
+      jsonSnippet.show();
+      xmlSnippet.hide();
     }
   },
 
@@ -27462,14 +27478,16 @@ SwaggerUi.Views.SignatureView = Backbone.View.extend({
 
   // handler for snippet to text area
   snippetToTextArea: function(val) {
-    var textArea = $('textarea', $(this.el.parentNode.parentNode.parentNode));
+    if (this.options.parameterView) {
+      var textArea = $('textarea', $(this.options.parameterView.el));
 
-    // Fix for bug in IE 10/11 which causes placeholder text to be copied to "value"
-    if ($.trim(textArea.val()) === '' || textArea.prop('placeholder') === textArea.val()) {
-      textArea.val(val);
-      // TODO move this code outside of the view and expose an event instead
-      if( this.model.jsonEditor && this.model.jsonEditor.isEnabled()){
-        this.model.jsonEditor.setValue(JSON.parse(this.model.sampleJSON));
+      // Fix for bug in IE 10/11 which causes placeholder text to be copied to "value"
+      if ($.trim(textArea.val()) === '' || textArea.prop('placeholder') === textArea.val()) {
+        textArea.val(val);
+        // TODO move this code outside of the view and expose an event instead
+        if( this.model.jsonEditor && this.model.jsonEditor.isEnabled()){
+          this.model.jsonEditor.setValue(JSON.parse(this.model.sampleJSON));
+        }
       }
     }
   },

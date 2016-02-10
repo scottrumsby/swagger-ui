@@ -18,14 +18,16 @@ SwaggerUi.Views.SignatureView = Backbone.View.extend({
 
   // handler for snippet to text area
   snippetToTextArea: function(val) {
-    var textArea = $('textarea', $(this.el.parentNode.parentNode.parentNode));
+    if (this.options.parameterView) {
+      var textArea = $('textarea', $(this.options.parameterView.el));
 
-    // Fix for bug in IE 10/11 which causes placeholder text to be copied to "value"
-    if ($.trim(textArea.val()) === '' || textArea.prop('placeholder') === textArea.val()) {
-      textArea.val(val);
-      // TODO move this code outside of the view and expose an event instead
-      if( this.model.jsonEditor && this.model.jsonEditor.isEnabled()){
-        this.model.jsonEditor.setValue(JSON.parse(this.model.sampleJSON));
+      // Fix for bug in IE 10/11 which causes placeholder text to be copied to "value"
+      if ($.trim(textArea.val()) === '' || textArea.prop('placeholder') === textArea.val()) {
+        textArea.val(val);
+        // TODO move this code outside of the view and expose an event instead
+        if( this.model.jsonEditor && this.model.jsonEditor.isEnabled()){
+          this.model.jsonEditor.setValue(JSON.parse(this.model.sampleJSON));
+        }
       }
     }
   },

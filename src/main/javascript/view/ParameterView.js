@@ -69,15 +69,20 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
       sampleXML: isXML ? SwaggerUi.partials.signature.createXMLSample(schema, modelDefinitions, true) : false,
       isParam: true,
       signature: SwaggerUi.partials.signature.getParameterModelSignature(modelType, modelDefinitions),
-      defaultRendering: this.model.defaultRendering
+      defaultRendering: this.model.defaultRendering,
+      type: this.model.name,
+      id: this.options.parentView.parentId + '_' + this.options.parentView.nickname + '_' + this.model.name
     };
 
+    var modelContainer = this.modelContainer();
+    //var modelContainer = $('.model-signature', $(this.el));
+
     if (this.model.sampleJSON) {
-      var signatureView = new SwaggerUi.Views.SignatureView({model: signatureModel, tagName: 'div'});
-      $('.model-signature', $(this.el)).append(signatureView.render().el);
+      var signatureView = new SwaggerUi.Views.SignatureView({model: signatureModel, tagName: 'div', parameterView: this});
+      modelContainer.append(signatureView.render().el);
     }
     else {
-      $('.model-signature', $(this.el)).html(this.model.signature);
+      modelContainer.html(this.model.signature);
     }
 
     var isParam = false;
@@ -137,7 +142,11 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
 
     return this;
   },
-
+  modelContainer: function() {
+    return this.options.parentView && $('.model-signature > .body-signature', $(this.options.parentView.el)).length > 0 && (this.model.paramType === 'body' || this.model.in === 'body')
+        ? $('.model-signature > .body-signature', $(this.options.parentView.el))
+        : $('.model-signature', $(this.el));
+  },
   contains: function (consumes, type) {
     if (typeof consumes === 'string') {
       consumes = [consumes];
@@ -164,12 +173,15 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
   },
 
   toggleSnippet: function (type) {
+    var modelContainer = this.modelContainer();
+    var xmlSnippet = $('.snippet_xml', modelContainer);
+    var jsonSnippet = $('.snippet_json', modelContainer);
     if (type.indexOf('xml') > -1) {
-      this.$('.snippet_xml').show();
-      this.$('.snippet_json').hide();
+      xmlSnippet.show();
+      jsonSnippet.hide();
     } else {
-      this.$('.snippet_json').show();
-      this.$('.snippet_xml').hide();
+      jsonSnippet.show();
+      xmlSnippet.hide();
     }
   },
 

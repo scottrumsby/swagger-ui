@@ -6,9 +6,10 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
   events: {
     'submit .sandbox': 'submitOperation',
     'click .submit': 'submitOperation',
-    'click  a.toggle-samples': 'toggleSamples'
+    'click  a.toggle-samples': 'toggleSamples',
 //    'mouseenter .api-ic': 'mouseEnter',
-//    'mouseout .api-ic': 'mouseExit'
+//    'mouseout .api-ic': 'mouseExit',
+    'change [name=responseContentType]' : 'showSnippet'
   },
 
   initialize: function (opts) {
@@ -190,10 +191,10 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
         type: "Response",
         id: this.parentId + '_' + this.nickname + '_response'
       });
-      $('.model-signature', $(this.el)).append(responseSignatureView.render().el);
+      $('.model-signature > .response-signature', $(this.el)).append(responseSignatureView.render().el);
     } else {
       this.model.responseClassSignature = 'string';
-      $('.model-signature', $(this.el)).html(this.model.type);
+      $('.model-signature > .response-signature', $(this.el)).html(this.model.type);
     }
 
     contentTypeModel = {
@@ -234,9 +235,6 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
     for (p = 0, len3 = ref4.length; p < len3; p++) {
       param = ref4[p];
       this.addParameter(param, contentTypeModel.consumes);
-      if (param.paramType === 'body' || param.in === 'body') {
-        this.addBodyModel(param)
-      }
     }
 
 
@@ -251,21 +249,9 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
       this.addStatusCode(statusCode);
     }
 
+    this.showSnippet();
+
     return this;
-  },
-
-  addBodyModel: function (param) {
-    if (param.type === 'file') return;
-
-    var bodySample = {
-      sampleJSON: param.sampleJSON,
-      isParam: true,
-      signature: param.signature,
-      type: "Body",
-      id: this.parentId + '_' + this.nickname + '_body'
-    };
-    var signatureView = new SwaggerUi.Views.SignatureView({model: bodySample, tagName: 'div'});
-    $('.model-signature', $(this.el)).append(signatureView.render().el);
   },
 
   parseHeadersType: function (headers) {
@@ -343,7 +329,8 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
       tagName: 'div',
       className: 'parameter-item',
       readOnly: this.model.isReadOnly,
-      swaggerOptions: this.options.swaggerOptions
+      swaggerOptions: this.options.swaggerOptions,
+      parentView: this
     });
     $('.operation-params', $(this.el)).append(paramView.render().el);
   },
@@ -820,8 +807,8 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
 
   showSnippet: function () {
     var contentTypeEl = this.$('[name=responseContentType]');
-    var xmlSnippetEl = this.$('.operation-status .snippet_xml, .response-class .snippet_xml');
-    var jsonSnippetEl = this.$('.operation-status .snippet_json, .response-class .snippet_json');
+    var xmlSnippetEl = this.$('.operation-status .snippet_xml, .response-class .snippet_xml, .model-signature > .response-signature .snippet_xml');
+    var jsonSnippetEl = this.$('.operation-status .snippet_json, .response-class .snippet_json, .model-signature > .response-signature .snippet_json');
     var contentType;
 
     if (!contentTypeEl.length) { return; }
