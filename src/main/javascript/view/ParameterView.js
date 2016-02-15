@@ -117,7 +117,6 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
         });
       }
 
-
     if (this.model.isBody) {
       isParam = true;
     }
@@ -135,6 +134,7 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
     }
 
     else {
+      //BINTAL Review - .response-content-type doesn't ever exist, so nothing is ever attached here
       var responseContentTypeView = new SwaggerUi.Views.ResponseContentTypeView({model: contentTypeModel});
       $('.response-content-type', $(this.el)).append(responseContentTypeView.render().el);
       this.toggleResponseSnippet();
@@ -142,9 +142,10 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
 
     return this;
   },
-  modelContainer: function() {
-    return this.options.parentView && $('.model-signature > .body-signature', $(this.options.parentView.el)).length > 0 && (this.model.paramType === 'body' || this.model.in === 'body')
-        ? $('.model-signature > .body-signature', $(this.options.parentView.el))
+  modelContainer: function(response) {
+    var parentQuery = response ? '.model-signature > .response-signature' : '.model-signature > .body-signature';
+    return (this.model.paramType === 'body' || this.model.in === 'body') && this.options.parentView && $(parentQuery, $(this.options.parentView.el)).length > 0
+        ? $(parentQuery, $(this.options.parentView.el))
         : $('.model-signature', $(this.el));
   },
   contains: function (consumes, type) {
@@ -169,19 +170,17 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
 
     if (!contentEl.length) { return; }
 
-    this.toggleSnippet(contentEl.val());
+    this.toggleSnippet(contentEl.val(), true);
   },
 
-  toggleSnippet: function (type) {
-    var modelContainer = this.modelContainer();
-    var xmlSnippet = $('.snippet_xml', modelContainer);
-    var jsonSnippet = $('.snippet_json', modelContainer);
+  toggleSnippet: function (type, response) {
+    var modelContainer = this.modelContainer(response);
+    var xmlSnippetTab = $('.nav li.xml-tab > a', modelContainer);
+    var jsonSnippetTab = $('.nav li.json-tab > a', modelContainer);
     if (type.indexOf('xml') > -1) {
-      xmlSnippet.show();
-      jsonSnippet.hide();
+      xmlSnippetTab.tab('show');
     } else {
-      jsonSnippet.show();
-      xmlSnippet.hide();
+      jsonSnippetTab.tab('show');
     }
   },
 

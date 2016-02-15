@@ -807,8 +807,10 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
 
   showSnippet: function () {
     var contentTypeEl = this.$('[name=responseContentType]');
-    var xmlSnippetEl = this.$('.operation-status .snippet_xml, .response-class .snippet_xml, .model-signature > .response-signature .snippet_xml');
-    var jsonSnippetEl = this.$('.operation-status .snippet_json, .response-class .snippet_json, .model-signature > .response-signature .snippet_json');
+    var xmlSnippetEl = this.$('.operation-status .snippet_xml, .response-class .snippet_xml');
+    var jsonSnippetEl = this.$('.operation-status .snippet_json, .response-class .snippet_json');
+    var xmlSnippetTab = this.$('.model-signature > .response-signature .nav li.xml-tab > a');
+    var jsonSnippetTab = this.$('.model-signature > .response-signature .nav li.json-tab > a');
     var contentType;
 
     if (!contentTypeEl.length) { return; }
@@ -817,9 +819,11 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
     if (contentType.indexOf('xml') > -1) {
       xmlSnippetEl.show();
       jsonSnippetEl.hide();
+      xmlSnippetTab.tab('show');
     } else {
       jsonSnippetEl.show();
       xmlSnippetEl.hide();
+      jsonSnippetTab.tab('show');
     }
   },
 

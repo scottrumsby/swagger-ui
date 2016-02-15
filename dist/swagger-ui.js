@@ -345,7 +345,7 @@ this["Handlebars"]["templates"]["operation"] = Handlebars.template({"1":function
   buffer += "\n                </div>\n\n";
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.responseMessages : depth0), {"name":"if","hash":{},"fn":this.program(18, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "            </form>\n\n        </div>\n\n        <div class=\"samples\">\n                <span class=\"model-signature\">\n                    <span class=\"body-signature\">\n                    </span>\n                    <span class=\"response-signature\">\n                    </span>\n                </span>\n        </div>\n\n        <div class=\"modal\" id=\"modal-"
+  return buffer + "            </form>\n\n        </div>\n\n        <div class=\"samples\">\n                <span class=\"model-signature\">\n                    <div class=\"body-signature\">\n                    </div>\n                    <div class=\"response-signature\">\n                    </div>\n                </span>\n        </div>\n\n        <div class=\"modal\" id=\"modal-"
     + escapeExpression(((helper = (helper = helpers.parentId || (depth0 != null ? depth0.parentId : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"parentId","hash":{},"data":data}) : helper)))
     + "_"
     + escapeExpression(((helper = (helper = helpers.nickname || (depth0 != null ? depth0.nickname : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"nickname","hash":{},"data":data}) : helper)))
@@ -729,43 +729,159 @@ this["Handlebars"]["templates"]["sidebar_item"] = Handlebars.template({"compiler
   return escapeExpression(((helper = (helper = helpers.summary || (depth0 != null ? depth0.summary : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"summary","hash":{},"data":data}) : helper)))
     + "\n";
 },"useData":true});
-this["Handlebars"]["templates"]["signature"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+this["Handlebars"]["templates"]["signature - Copy"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
-  return "        <div class=\"snippet_json\">\n            <pre><code>"
-    + escapeExpression(((helper = (helper = helpers.sampleJSON || (depth0 != null ? depth0.sampleJSON : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"sampleJSON","hash":{},"data":data}) : helper)))
-    + "</code></pre>\n        </div>\n";
+  return "        <li role=\"presentation\" class=\"\">\n            <a href=\"#schema_"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "_pane\" aria-controls=\"json-signature\" role=\"tab\" data-toggle=\"tab\">Schema</a>\n        </li>\n";
 },"3":function(depth0,helpers,partials,data) {
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
-  return "            <div class=\"snippet_xml\">\n                <pre><code>"
-    + escapeExpression(((helper = (helper = helpers.sampleXML || (depth0 != null ? depth0.sampleXML : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"sampleXML","hash":{},"data":data}) : helper)))
-    + "</code></pre>\n            </div>\n";
+  return "                        <div role=\"tabpanel\" class=\"snippet_json tab-pane active\" id=\"sample_"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "_json\">\n                            <pre><code>"
+    + escapeExpression(((helper = (helper = helpers.sampleJSON || (depth0 != null ? depth0.sampleJSON : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"sampleJSON","hash":{},"data":data}) : helper)))
+    + "</code></pre>\n                        </div>\n";
 },"5":function(depth0,helpers,partials,data) {
-  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "    <h4 class=\"schema-title collapsed\" data-control data-toggle=\"collapse\"\n        data-target=\"#schema-"
+  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "                        <div role=\"tabpanel\" class=\"snippet_xml tab-pane ";
+  stack1 = helpers.unless.call(depth0, (depth0 != null ? depth0.sampleJSON : depth0), {"name":"unless","hash":{},"fn":this.program(6, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "\" id=\"sample_"
     + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
-    + "\">"
-    + escapeExpression(((helper = (helper = helpers.type || (depth0 != null ? depth0.type : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"type","hash":{},"data":data}) : helper)))
-    + " Schema</h4>\n    <div data-content class=\"collapse\" id=\"schema-"
+    + "_xml\">\n                            <pre><code>"
+    + escapeExpression(((helper = (helper = helpers.sampleXML || (depth0 != null ? depth0.sampleXML : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"sampleXML","hash":{},"data":data}) : helper)))
+    + "</code></pre>\n                        </div>\n";
+},"6":function(depth0,helpers,partials,data) {
+  return "active";
+  },"8":function(depth0,helpers,partials,data) {
+  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  return "                            <li role=\"presentation\" class=\"active json-tab\"><a href=\"#sample_"
     + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\n        <div class=\"description\">\n            ";
+    + "_json\" aria-controls=\"json-signature\" role=\"tab\" data-toggle=\"tab\">JSON</a></li>\n";
+},"10":function(depth0,helpers,partials,data) {
+  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "                            <li role=\"presentation\" class=\"";
+  stack1 = helpers.unless.call(depth0, (depth0 != null ? depth0.sampleJSON : depth0), {"name":"unless","hash":{},"fn":this.program(11, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + " xml-tab\"><a href=\"#sample_"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "_xml\" aria-controls=\"xml-signature\" role=\"tab\" data-toggle=\"tab\">XML</a></li>\n";
+},"11":function(depth0,helpers,partials,data) {
+  return "active ";
+  },"13":function(depth0,helpers,partials,data) {
+  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "        <div role=\"tabpanel\" class=\"tab-pane\" id=\"schema_"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "_pane\">\n            <div data-content class=\"collapse in\" id=\"schema-"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "\">\n                <div class=\"description\">\n                    ";
   stack1 = ((helper = (helper = helpers.signature || (depth0 != null ? depth0.signature : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"signature","hash":{},"data":data}) : helper));
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "\n        </div>\n    </div>\n";
+  return buffer + "\n                </div>\n            </div>\n        </div>\n";
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<h4 class=\"sample-title\" data-control data-toggle=\"collapse\"\n    data-target=\"#sample-"
+  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<h4 class=\"sample-title\" data-control data-toggle=\"collapse\"\n    data-target=\"#signature-"
     + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
     + "\">"
     + escapeExpression(((helper = (helper = helpers.type || (depth0 != null ? depth0.type : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"type","hash":{},"data":data}) : helper)))
-    + " Sample</h4>\n<div data-content class=\"collapse in\" id=\"sample-"
+    + "</h4>\n<div data-content class=\"collapse in\" id=\"signature-"
     + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\n    <div class=\"snippet\">\n";
+    + "\">\n    <ul class=\"nav nav-tabs\" role=\"tablist\">\n        <li role=\"presentation\" class=\"active\">\n            <a href=\"#sample_"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "_pane\" aria-controls=\"json-signature\" role=\"tab\" data-toggle=\"tab\">Sample</a>\n        </li>\n";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.signature : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "    </ul>\n\n    <div class=\"tab-content\">\n        <div role=\"tabpanel\" class=\"tab-pane active\" id=\"sample_"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "_pane\">\n            <div data-content class=\"collapse in\" id=\"sample-"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "\">\n                <div class=\"snippet\">\n                    <div class=\"tab-content\">\n";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.sampleJSON : depth0), {"name":"if","hash":{},"fn":this.program(3, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.sampleXML : depth0), {"name":"if","hash":{},"fn":this.program(5, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "                    </div>\n                    <ul class=\"nav nav-pills\" role=\"tablist\">\n";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.sampleJSON : depth0), {"name":"if","hash":{},"fn":this.program(8, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.sampleXML : depth0), {"name":"if","hash":{},"fn":this.program(10, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "                    </ul>\n                </div>\n            </div>\n        </div>\n\n";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.signature : depth0), {"name":"if","hash":{},"fn":this.program(13, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "    </div>\n</div>";
+},"useData":true});
+this["Handlebars"]["templates"]["signature"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  return "                        <li role=\"presentation\" class=\"active json-tab\">\n                            <a class=\"btn\" href=\"#sample_"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "_json\" aria-controls=\"json-signature\" role=\"tab\"\n                               data-toggle=\"tab\">JSON</a>\n                        </li>\n";
+},"3":function(depth0,helpers,partials,data) {
+  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "                        <li role=\"presentation\" class=\"";
+  stack1 = helpers.unless.call(depth0, (depth0 != null ? depth0.sampleJSON : depth0), {"name":"unless","hash":{},"fn":this.program(4, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + " xml-tab\">\n                            <a class=\"btn\" href=\"#sample_"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "_xml\" aria-controls=\"xml-signature\" role=\"tab\"\n                               data-toggle=\"tab\">XML</a>\n                        </li>\n";
+},"4":function(depth0,helpers,partials,data) {
+  return "active ";
+  },"6":function(depth0,helpers,partials,data) {
+  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  return "                <li role=\"presentation\" class=\"\">\n                    <a href=\"#schema_"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "_pane\" aria-controls=\"json-signature\" role=\"tab\" data-toggle=\"tab\">Schema</a>\n                </li>\n";
+},"8":function(depth0,helpers,partials,data) {
+  var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  return "                <div role=\"tabpanel\" class=\"snippet_json tab-pane active\" id=\"sample_"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "_json\">\n                    <pre><code>"
+    + escapeExpression(((helper = (helper = helpers.sampleJSON || (depth0 != null ? depth0.sampleJSON : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"sampleJSON","hash":{},"data":data}) : helper)))
+    + "</code></pre>\n                    <div class=\"body-type-label\"><span class=\"label label-default\">JSON</span></div>\n                </div>\n";
+},"10":function(depth0,helpers,partials,data) {
+  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "                <div role=\"tabpanel\" class=\"snippet_xml tab-pane ";
+  stack1 = helpers.unless.call(depth0, (depth0 != null ? depth0.sampleJSON : depth0), {"name":"unless","hash":{},"fn":this.program(11, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "\"\n                     id=\"sample_"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "_xml\">\n                    <pre><code>"
+    + escapeExpression(((helper = (helper = helpers.sampleXML || (depth0 != null ? depth0.sampleXML : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"sampleXML","hash":{},"data":data}) : helper)))
+    + "</code></pre>\n                    <div class=\"body-type-label\"><span class=\"label label-default\">XML</span></div>\n                </div>\n";
+},"11":function(depth0,helpers,partials,data) {
+  return "active";
+  },"13":function(depth0,helpers,partials,data) {
+  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "                <div role=\"tabpanel\" class=\"tab-pane\" id=\"schema_"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "_pane\">\n                    <div class=\"description\">\n                        ";
+  stack1 = ((helper = (helper = helpers.signature || (depth0 != null ? depth0.signature : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"signature","hash":{},"data":data}) : helper));
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "\n                    </div>\n                </div>\n";
+},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<div class=\"signature-container\">\n    <h4 class=\"sample-title\" data-control data-toggle=\"collapse\"\n        data-target=\"#signature-"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "\">"
+    + escapeExpression(((helper = (helper = helpers.type || (depth0 != null ? depth0.type : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"type","hash":{},"data":data}) : helper)))
+    + "</h4>\n    <div data-content class=\"collapse in\" id=\"signature-"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "\">\n        <ul class=\"nav nav-tabs\" role=\"tablist\">\n            <li role=\"presentation\" class=\"dropdown active\">\n                <a id=\"sample_"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "_dropdown\" href=\"#sample_"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "_pane\" class=\"dropdown-toggle\" data-toggle=\"dropdown\"\n                   aria-controls=\"sample_"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "_pane\" role=\"tab\">Sample</a>\n                <ul class=\"dropdown-menu\" aria-labelledby=\"sample_"
+    + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
+    + "_dropdown\">\n";
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.sampleJSON : depth0), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.sampleXML : depth0), {"name":"if","hash":{},"fn":this.program(3, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
-  buffer += "    </div>\n</div>\n\n";
-  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.signature : depth0), {"name":"if","hash":{},"fn":this.program(5, data),"inverse":this.noop,"data":data});
+  buffer += "                </ul>\n            </li>\n";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.signature : depth0), {"name":"if","hash":{},"fn":this.program(6, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
-  return buffer;
+  buffer += "        </ul>\n\n        <div class=\"tab-content\">\n";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.sampleJSON : depth0), {"name":"if","hash":{},"fn":this.program(8, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.sampleXML : depth0), {"name":"if","hash":{},"fn":this.program(10, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  buffer += "\n";
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.signature : depth0), {"name":"if","hash":{},"fn":this.program(13, data),"inverse":this.noop,"data":data});
+  if (stack1 != null) { buffer += stack1; }
+  return buffer + "        </div>\n    </div>\n</div>";
 },"useData":true});
 this["Handlebars"]["templates"]["status_code"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<td style=\"width: 20px;\"><strong>"
@@ -25499,9 +25615,6 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
     for (p = 0, len3 = ref4.length; p < len3; p++) {
       param = ref4[p];
       this.addParameter(param, contentTypeModel.consumes);
-      if (param.paramType === 'body' || param.in === 'body') {
-        ////this.addBodyModel(param)
-      }
     }
 
 
@@ -25519,20 +25632,6 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
     this.showSnippet();
 
     return this;
-  },
-
-  addBodyModel: function (param) {
-    if (param.type === 'file') return;
-
-    var bodySample = {
-      sampleJSON: param.sampleJSON,
-      isParam: true,
-      signature: param.signature,
-      type: "Body",
-      id: this.parentId + '_' + this.nickname + '_body'
-    };
-    var signatureView = new SwaggerUi.Views.SignatureView({model: bodySample, tagName: 'div'});
-    $('.model-signature > .body-signature', $(this.el)).append(signatureView.render().el);
   },
 
   parseHeadersType: function (headers) {
@@ -26088,8 +26187,10 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
 
   showSnippet: function () {
     var contentTypeEl = this.$('[name=responseContentType]');
-    var xmlSnippetEl = this.$('.operation-status .snippet_xml, .response-class .snippet_xml, .model-signature > .response-signature .snippet_xml');
-    var jsonSnippetEl = this.$('.operation-status .snippet_json, .response-class .snippet_json, .model-signature > .response-signature .snippet_json');
+    var xmlSnippetEl = this.$('.operation-status .snippet_xml, .response-class .snippet_xml');
+    var jsonSnippetEl = this.$('.operation-status .snippet_json, .response-class .snippet_json');
+    var xmlSnippetTab = this.$('.model-signature > .response-signature .nav li.xml-tab > a');
+    var jsonSnippetTab = this.$('.model-signature > .response-signature .nav li.json-tab > a');
     var contentType;
 
     if (!contentTypeEl.length) { return; }
@@ -26098,9 +26199,11 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
     if (contentType.indexOf('xml') > -1) {
       xmlSnippetEl.show();
       jsonSnippetEl.hide();
+      xmlSnippetTab.tab('show');
     } else {
       jsonSnippetEl.show();
       xmlSnippetEl.hide();
+      jsonSnippetTab.tab('show');
     }
   },
 
@@ -26249,7 +26352,6 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
         });
       }
 
-
     if (this.model.isBody) {
       isParam = true;
     }
@@ -26267,6 +26369,7 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
     }
 
     else {
+      //BINTAL Review - .response-content-type doesn't ever exist, so nothing is ever attached here
       var responseContentTypeView = new SwaggerUi.Views.ResponseContentTypeView({model: contentTypeModel});
       $('.response-content-type', $(this.el)).append(responseContentTypeView.render().el);
       this.toggleResponseSnippet();
@@ -26274,9 +26377,10 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
 
     return this;
   },
-  modelContainer: function() {
-    return this.options.parentView && $('.model-signature > .body-signature', $(this.options.parentView.el)).length > 0 && (this.model.paramType === 'body' || this.model.in === 'body')
-        ? $('.model-signature > .body-signature', $(this.options.parentView.el))
+  modelContainer: function(response) {
+    var parentQuery = response ? '.model-signature > .response-signature' : '.model-signature > .body-signature';
+    return (this.model.paramType === 'body' || this.model.in === 'body') && this.options.parentView && $(parentQuery, $(this.options.parentView.el)).length > 0
+        ? $(parentQuery, $(this.options.parentView.el))
         : $('.model-signature', $(this.el));
   },
   contains: function (consumes, type) {
@@ -26301,19 +26405,17 @@ SwaggerUi.Views.ParameterView = Backbone.View.extend({
 
     if (!contentEl.length) { return; }
 
-    this.toggleSnippet(contentEl.val());
+    this.toggleSnippet(contentEl.val(), true);
   },
 
-  toggleSnippet: function (type) {
-    var modelContainer = this.modelContainer();
-    var xmlSnippet = $('.snippet_xml', modelContainer);
-    var jsonSnippet = $('.snippet_json', modelContainer);
+  toggleSnippet: function (type, response) {
+    var modelContainer = this.modelContainer(response);
+    var xmlSnippetTab = $('.nav li.xml-tab > a', modelContainer);
+    var jsonSnippetTab = $('.nav li.json-tab > a', modelContainer);
     if (type.indexOf('xml') > -1) {
-      xmlSnippet.show();
-      jsonSnippet.hide();
+      xmlSnippetTab.tab('show');
     } else {
-      jsonSnippet.show();
-      xmlSnippet.hide();
+      jsonSnippetTab.tab('show');
     }
   },
 
@@ -26680,7 +26782,14 @@ SwaggerUi.partials.signature = (function () {
       }
 
       if (options.length > 0) {
-        html = '<span class="propWrap">' + html + '<table class="optionsWrapper"><tr><th colspan="2">' + type + '</th></tr>' + options + '</table></span>';
+        //html = '<span class="propWrap">' + html + '<table class="optionsWrapper"><tr><th colspan="2">' + type + '</th></tr>' + options + '</table></span>';
+        options = '<table>' + options + '</table>';
+        options = options.replace(/&/g, '&amp;');
+        options = options.replace(/</g, '&lt;');
+        options = options.replace(/>/g, '&gt;');
+        options = options.replace(/\"/g, '&quot;');
+        var tooltip = "&lt;span class='label label-default'&gt;"+type+"&lt;/span&gt;&nbsp;"+ options;
+        html = '<div data-toggle="tooltip" data-placement="left" data-html="true" class="propWrap" title="'+tooltip+'">' + html + '</div>';
       }
 
       return html;
