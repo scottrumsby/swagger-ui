@@ -155,6 +155,7 @@
                 }
 
                 function r(e) {
+                    console.log("Scrolling");
                     function i() {
                         var i = $(window).scrollTop(), r = e.parents(".sticky-nav");
                         return r.hasClass("fixed") && !n() && (i = i + r.outerHeight() + 40), i
@@ -200,11 +201,13 @@
                         var n = $(".sticky-nav [data-navigator]");
                         $("#" + e.attr("data-endpoint"))
                     }
-                    n.find("[data-resource]").removeClass("active");
-                    n.find("[data-selected]").removeAttr("data-selected");
-                    e.closest("[data-resource]").addClass("active");
-                    e.attr("data-selected", "");
-                    sticky.find("[data-selected-value]").html(e.text())
+                    if (!n.attr('data-scrolling')) {
+                        n.find("[data-resource]").removeClass("active");
+                        n.find("[data-selected]").removeAttr("data-selected");
+                        e.closest("[data-resource]").addClass("active");
+                        e.attr("data-selected", "");
+                        sticky.find("[data-selected-value]").html(e.text());
+                    }
                 }
             });
 

@@ -1172,6 +1172,11 @@
         letter-spacing: 0;
         color: #5c666f
     }
+
+    .swagger-section .sticky-nav [data-navigator] [data-resource].active:before {
+        font-weight: 700;
+        color: #333;
+    }
 }
 
 @media (min-width: 992px) {
@@ -1233,7 +1238,7 @@
 
 @media (min-width: 992px) {
     .swagger-section .sticky-nav [data-navigator] .item[data-selected] {
-        background: #f3f3f4;
+        //background: #f3f3f4;
         font-weight: 700;
         color: #333
     }
