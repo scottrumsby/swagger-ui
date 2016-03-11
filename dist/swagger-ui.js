@@ -26782,14 +26782,7 @@ SwaggerUi.partials.signature = (function () {
       }
 
       if (options.length > 0) {
-        //html = '<span class="propWrap">' + html + '<table class="optionsWrapper"><tr><th colspan="2">' + type + '</th></tr>' + options + '</table></span>';
-        options = '<table>' + options + '</table>';
-        options = options.replace(/&/g, '&amp;');
-        options = options.replace(/</g, '&lt;');
-        options = options.replace(/>/g, '&gt;');
-        options = options.replace(/\"/g, '&quot;');
-        var tooltip = "&lt;span class='label label-default'&gt;"+type+"&lt;/span&gt;&nbsp;"+ options;
-        html = '<div data-toggle="tooltip" data-placement="left" data-html="true" class="propWrap" title="'+tooltip+'">' + html + '</div>';
+        html = '<span class="propWrap">' + html + '<table class="optionsWrapper"><tr><th colspan="2">' + type + '</th></tr>' + options + '</table></span>';
       }
 
       return html;
