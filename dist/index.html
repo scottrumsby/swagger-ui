@@ -53,6 +53,7 @@
             } else {
                 url = "http://petstore.swagger.io/v2/swagger.json";
             }
+            
 
             // Pre load translate...
             if (window.SwaggerTranslator) {
@@ -94,11 +95,19 @@
                 onFailure: function (data) {
                     log("Unable to Load SwaggerUI");
                 },
+/*
                 docExpansion: "none",
                 //jsonEditor: false,
                 apisSorter: "alpha"//,
                 //defaultModelRendering: 'schema',
                 //showRequestHeaders: false
+*/
+        docExpansion: "list",
+        jsonEditor: false,
+        apisSorter: "alpha",
+        defaultModelRendering: 'schema',
+        showRequestHeaders: true
+
             });
 
             function addApiKeyAuthorization() {
@@ -222,7 +231,7 @@
 </head>
 
 <body class="page-docs" style="zoom: 1;">
-<header class="site-header">
+<!--header class="site-header">
     <nav role="navigation" class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
@@ -240,7 +249,7 @@
             </div>
         </div>
     </nav>
-</header>
+</header-->
 
 <section class="content">
     <div id="api2-explorer">
