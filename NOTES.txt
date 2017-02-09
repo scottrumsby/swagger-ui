@@ -1,0 +1,33 @@
+The code in this branch addresses the following issue found in swagger-ui core:
+
+- HTML markup included in the response.{status_code}.description of an API 
+  spec operation is not rendered as HTML.
+
+The community is not interested in changing this behaviour because.  Details 
+are provided in this Issue: https://github.com/swagger-api/swagger-ui/issues/2630
+
+It is curious that the community has only restricted HTML markup in in the "response"
+content.  As yet, HTML markup from elsewhere in an API spec is still correctly rendered 
+by swagger-ui (for example, HTML markup in parameter descriptions is permitted).  I
+assume the community will eventually restrict all HTML markup in the API spec files 
+though.  The community now prefers to support markdown syntax.
+
+Despite swagger-ui moving away from allowing HTML markup, DataBC wants it because:
+- markdown syntax has no ability to specify that links open in new tabs.  opening links
+  in new tabs is essential for DataBC.
+Additionally, DataBC is not concerned about the XSS vulnerability with allowing HTML 
+markup. (I'm unsure why they are not concerned.  Clarify this sometime.)
+
+It is a simple modification to make swagger-ui support HTML markup in
+response.{status_code}.description.  To do this we just modify one of the
+template files:
+
+	/templates/status_codes.handlebars
+
+	change line 2 from:
+	  <td class="markdown">{{{escape message}}}</td>
+	to:
+	  <td class="markdown">{{{sanitize message}}}</td>
+
+Note: 'sanitize' is a helper defined in src/main/javascript/helpers/handlebars.js.
+It is the same helper that ise used to render HTML markup for parameter descriptions.
