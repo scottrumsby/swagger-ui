@@ -1201,6 +1201,9 @@
 .swagger-section .authorize-wrapper_operation {
   float: right;
 }
+.swagger-section .authorize__btn {
+  max-width: 87px;
+}
 .swagger-section .authorize__btn:hover {
   text-decoration: underline;
   cursor: pointer;
@@ -1247,7 +1250,7 @@
   display: inline-block;
   border: none;
   padding: 5px;
-  width: 87px;
+  width: 200px;
   height: 13px;
 }
 .swagger-section #auth_container .authorize__btn {
