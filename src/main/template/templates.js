@@ -23,7 +23,7 @@ templates['apikey_auth'] = template({"1":function(container,depth0,helpers,parti
     + "        </div>\n    </div>\n</div>\n";
 },"useData":true});
 templates['auth_button'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<a class='authorize__btn' href=\"#\">Authorize</a>\n";
+    return "<span>\n  <a id=\"get_api_key\" href=\"https://forms.gov.bc.ca/databc-contact-us/\" target=\"blank\">Request Key</a> \n  <a class='authorize__btn' href=\"#\">Authorize</a>\n</span>\n";
 },"useData":true});
 templates['auth_button_operation'] = template({"1":function(container,depth0,helpers,partials,data) {
     return "        authorize__btn_operation_login\n";

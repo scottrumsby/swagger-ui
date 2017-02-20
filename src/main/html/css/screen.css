@@ -1225,6 +1225,9 @@
 .swagger-section .authorize-wrapper_operation {
   float: right;
 }
+.swagger-section .authorize__btn {
+  max-width: 87px;
+}
 .swagger-section .authorize__btn:hover {
   text-decoration: underline;
   cursor: pointer;
@@ -1271,7 +1274,7 @@
   display: inline-block;
   border: none;
   padding: 5px;
-  width: 87px;
+  width: 200px;
   height: 13px;
 }
 .swagger-section #auth_container .authorize__btn {
@@ -1471,9 +1474,10 @@
 .swagger-section #input_apiKey {
   width: 200px;
 }
+.swagger-section #get_api_key,
 .swagger-section #explore,
 .swagger-section #auth_container .authorize__btn {
-  display: block;
+  display: inline-block;
   text-decoration: none;
   font-weight: bold;
   padding: 6px 8px;
@@ -1487,6 +1491,7 @@
   -khtml-border-radius: 4px;
   border-radius: 4px;
 }
+.swagger-section #get_api_key:hover,
 .swagger-section #explore:hover,
 .swagger-section #auth_container .authorize__btn:hover {
   background-color: #547f00;
