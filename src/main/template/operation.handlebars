@@ -112,14 +112,20 @@
         <div class='response' style='display:none'>
           <h4 class='curl'>Curl</h4>
           <div class='block curl'></div>
-          <h4 data-sw-translate>Request URL</h4>
-          <div class='block request_url'></div>
+          <div style="overflow: hidden">
+            <h4 data-sw-translate>Request URL</h4>        
+            <div id="request_url" class='block request_url'></div>
+            <button class="btn-copy" data-clipboard-target="#request_url" style="float: right; margin-top: 5px;">Copy Request URL</button>
+          </div>
           {{#if showRequestHeaders}}
           <h4 data-sw-translate>Request Headers</h4>
           <div class='block request_headers'></div>
           {{/if}}
-          <h4 data-sw-translate>Response Body</h4>
-          <div class='block response_body'></div>
+          <div style="overflow: hidden">
+            <h4 data-sw-translate>Response Body</h4>
+            <div id="response_body" class='block response_body'></div>
+            <button class="btn-copy" data-clipboard-target="#response_body" style="float: right; margin-top: 5px;">Copy Response Body</button>
+          </div>
           <h4 data-sw-translate>Response Code</h4>
           <div class='block response_code'></div>
           <h4 data-sw-translate>Response Headers</h4>
