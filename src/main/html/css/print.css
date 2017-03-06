@@ -225,6 +225,9 @@
   box-sizing: border-box;
   width: 60%;
 }
+.swagger-section .swagger-ui-wrap button {
+  padding: 6px 8px;
+}
 .swagger-section .swagger-ui-wrap table {
   border-collapse: collapse;
   border-spacing: 0;
