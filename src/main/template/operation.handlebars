@@ -115,7 +115,10 @@
           <div style="overflow: hidden">
             <h4 data-sw-translate>Request URL</h4>        
             <div id="request_url" class='block request_url'></div>
-            <button class="btn-copy" data-clipboard-target="#request_url" style="float: right; margin-top: 5px;">Copy Request URL</button>
+            <div style="float: right; margin-top: 5px;">
+              <button class="btn-copy" data-clipboard-target="#request_url">Copy Request URL</button>
+              <button id="open_request_url">Open Request URL</button>
+            </div>
           </div>
           {{#if showRequestHeaders}}
           <h4 data-sw-translate>Request Headers</h4>
@@ -124,7 +127,7 @@
           <div style="overflow: hidden">
             <h4 data-sw-translate>Response Body</h4>
             <div id="response_body" class='block response_body'></div>
-            <button class="btn-copy" data-clipboard-target="#response_body" style="float: right; margin-top: 5px;">Copy Response Body</button>
+            <button class="btn-copy submit" data-clipboard-target="#response_body" style="float: right; margin-top: 5px;">Copy Response Body</button>
           </div>
           <h4 data-sw-translate>Response Code</h4>
           <div class='block response_code'></div>

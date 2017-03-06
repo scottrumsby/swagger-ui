@@ -781,6 +781,7 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
     var response_body = pre;
     $('.request_url', $(this.el)).html('<pre></pre>');
     $('.request_url pre', $(this.el)).text(url);
+    $('#open_request_url', $(this.el)).attr('onclick', 'window.open("'+url+'","_blank")');
     $('.response_code', $(this.el)).html('<pre>' + response.status + '</pre>');
     $('.response_body', $(this.el)).html(response_body);
     $('.response_headers', $(this.el)).html('<pre>' + _.escape(JSON.stringify(response.headers, null, '  ')).replace(/\n/g, '<br>') + '</pre>');
