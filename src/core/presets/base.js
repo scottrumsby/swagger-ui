@@ -72,7 +72,7 @@ export default function() {
       operations: Operations,
       operation: Operation,
       highlightCode: HighlightCode,
-	  requestUrl: RequestUrl,
+      requestUrl: RequestUrl,
       responses: Responses,
       response: Response,
       responseBody: ResponseBody,
