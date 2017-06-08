@@ -17,8 +17,7 @@ module.exports = require('./make-webpack-config.js')({
     "swagger-ui": [
       'babel-polyfill',
       './src/style/main.scss',
-      './src/core/index.js',
-	  './node_modules/clipboard/lib/clipboard.js'
+      './src/core/index.js'
     ]
   },
 

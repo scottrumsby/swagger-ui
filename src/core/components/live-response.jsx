@@ -42,7 +42,7 @@ export default class LiveResponse extends React.Component {
     return (
       <div>
         { request && <Curl request={ request }/> }
-		{ request && <RequestUrl request={ request }/> }
+		{ request && <RequestUrl request={ request } getComponent={ getComponent } /> }
         <h4>Server response</h4>
         <table className="responses-table">
           <thead>
