@@ -26,6 +26,7 @@ import OnlineValidatorBadge from "core/components/online-validator-badge"
 import Operations from "core/components/operations"
 import Operation from "core/components/operation"
 import HighlightCode from "core/components/highlight-code"
+import RequestUrl from "core/components/request-url"
 import Responses from "core/components/responses"
 import Response from "core/components/response"
 import ResponseBody from "core/components/response-body"
@@ -71,6 +72,7 @@ export default function() {
       operations: Operations,
       operation: Operation,
       highlightCode: HighlightCode,
+      requestUrl: RequestUrl,
       responses: Responses,
       response: Response,
       responseBody: ResponseBody,
