@@ -5,12 +5,19 @@ export default class BcGwaAuthorizationPopup extends React.Component {
     let { authActions } = this.props
 
     authActions.showDefinitions(false)
+
+    console.log("Let's add the key to Swagger now")
   }
 
   render() {
     let { authSelectors, authActions, getComponent, errSelectors, specSelectors, fn: { AST } } = this.props
     let definitions = authSelectors.shownDefinitions()
     const Auths = getComponent("auths")
+
+    const iFrameStyle = {
+      height: "475px",
+      width: "100%"
+    }
 
     return (
       <div className="dialog-ux">
@@ -19,7 +26,7 @@ export default class BcGwaAuthorizationPopup extends React.Component {
           <div className="modal-dialog-ux">
             <div className="modal-ux-inner">
               <div className="modal-ux-header">
-                <h3>Login to Fetch API Key`</h3>
+                <h3>Login to Fetch API Key</h3>
                 <button type="button" className="close-modal" onClick={ this.close }>
                   <svg width="20" height="20">
                     <use xlinkHref="#close" />
@@ -27,19 +34,7 @@ export default class BcGwaAuthorizationPopup extends React.Component {
                 </button>
               </div>
               <div className="modal-ux-content">
-
-                {
-                  definitions.valueSeq().map(( definition, key ) => {
-                    return <Auths key={ key }
-                                  AST={AST}
-                                  definitions={ definition }
-                                  getComponent={ getComponent }
-                                  errSelectors={ errSelectors }
-                                  authSelectors={ authSelectors }
-                                  authActions={ authActions }
-                                  specSelectors={ specSelectors }/>
-                  })
-                }
+                <iframe src="https://gwa-t.apps.gov.bc.ca/ui/apiKeys" style={iFrameStyle} />
               </div>
             </div>
           </div>
