@@ -21,21 +21,28 @@ export default class BcGwaApiKeyAuth extends React.Component {
       schema: schema,
       value: value
     }
+    
+    fetchApiKey()
+  }
+  
+  fetchApiKey() {
+      fetch("https://www.blameadam.com/api/getToken/", {
+      credentials: "same-origin"
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson);
+      let newState = Object.assign({}, this.state, { value: responseJson.key })
+      authorizeState(newState)
+      this.state = newState
+    })
+    .catch((error) => {
+      console.log("User not authenticated... open dialog")
+    })
   }
 
   componentWillUnmount() {
-    let { onChange, authorizeState } = this.props
-    fetch("https://www.blameadam.com/api/getToken/")
-    .then((response) => response.json())
-    .then((responseJson) => {
-      let newState = Object.assign({}, this.state, { value: responseJson.key })
-      authorizeState(newState)
-    })
-    .catch((error) => {
-      console.log("User not authenticated.")
-    })
-    
-    
+    fetchApiKey()
   }
 
   render() {
