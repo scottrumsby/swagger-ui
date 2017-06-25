@@ -8,8 +8,16 @@ export default class AuthorizeBtn extends React.Component {
   onClick =() => {
     let { authActions, authSelectors } = this.props
     let definitions = authSelectors.definitionsToAuthorize()
-
-    authActions.showDefinitions(definitions)
+    
+    fetch("https://www.blameadam.com/api/getToken/")
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson);
+    })
+    .catch((error) => {
+      console.log("User not authenticated... open dialog")
+      authActions.showDefinitions(definitions)
+    })
   }
 
   render() {
