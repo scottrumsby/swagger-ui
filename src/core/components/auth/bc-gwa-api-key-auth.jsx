@@ -8,7 +8,7 @@ export default class BcGwaApiKeyAuth extends React.Component {
     schema: PropTypes.object.isRequired,
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
-    authorizeState: PropTypes.func
+    authorizeState: PropTypes.func,
   }
 
   constructor(props, context) {
@@ -22,11 +22,12 @@ export default class BcGwaApiKeyAuth extends React.Component {
       value: value
     }
     
-    fetchApiKey()
+    this.fetchApiKey()
   }
   
   fetchApiKey() {
-      fetch("https://www.blameadam.com/api/getToken/", {
+    let { authorizeState, authActions } = this.props
+    fetch("https://www.blameadam.com/api/getToken/", {
       credentials: "same-origin"
     })
     .then((response) => response.json())
@@ -34,15 +35,16 @@ export default class BcGwaApiKeyAuth extends React.Component {
       console.log(responseJson);
       let newState = Object.assign({}, this.state, { value: responseJson.key })
       authorizeState(newState)
-      this.state = newState
     })
     .catch((error) => {
-      console.log("User not authenticated... open dialog")
+      console.log(error)
+      console.log("Dialog open - user not authenticated.")
     })
   }
 
   componentWillUnmount() {
-    fetchApiKey()
+    console.log("Unmounting")
+    this.fetchApiKey()
   }
 
   render() {
@@ -62,7 +64,7 @@ export default class BcGwaApiKeyAuth extends React.Component {
     
     return (
       <div>
-        <iframe src="https://www.blameadam.com/api/admin/login/" style={iframeStyle} />
+        <iframe src="https://www.blameadam.com/api/admin/login/" style={iframeStyle} frameBorder="0" />
       </div>
     )
   }
