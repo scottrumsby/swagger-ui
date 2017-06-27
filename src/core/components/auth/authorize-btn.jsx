@@ -3,17 +3,6 @@ import React, { PropTypes } from "react"
 export default class AuthorizeBtn extends React.Component {
   static propTypes = {
     className: PropTypes.string,
-    authActions: PropTypes.object.isRequired,
-  }
-
-  authorizeState =(auth) => {
-    let { authActions } = this.props
-    let { name } = auth
-    
-    let newState = { "apikey": auth }
-    console.log("Authorizing in btn")
-    console.log(newState)
-    authActions.authorize(newState)
   }
 
   onClick =() => {
