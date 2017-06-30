@@ -29,14 +29,6 @@ export default class Auths extends React.Component {
 
     authActions.authorize(this.state)
   }
-  
-  authorizeState =(auth) => {
-    let { authActions } = this.props
-    let { name } = auth
-    
-    let newState = { [name]: auth }
-    authActions.authorize(newState)
-  }
 
   logoutClick =(e) => {
     e.preventDefault()
@@ -52,7 +44,6 @@ export default class Auths extends React.Component {
   render() {
     let { definitions, getComponent, authSelectors, errSelectors } = this.props
     const ApiKeyAuth = getComponent("apiKeyAuth")
-    const BcGwaApiKeyAuth = getComponent("bcGwaApiKeyAuth")
     const BasicAuth = getComponent("basicAuth")
     const Oauth2 = getComponent("oauth2", true)
     const Button = getComponent("Button")
@@ -76,14 +67,13 @@ export default class Auths extends React.Component {
                 let authEl
 
                 switch(type) {
-                  case "apiKey": authEl = <BcGwaApiKeyAuth key={ name }
+                  case "apiKey": authEl = <ApiKeyAuth key={ name }
                                                     schema={ schema }
                                                     name={ name }
                                                     errSelectors={ errSelectors }
                                                     authorized={ authorized }
                                                     getComponent={ getComponent }
-                                                    onChange={ this.onAuthChange } 
-                                                    authorizeState = { this.authorizeState } />
+                                                    onChange={ this.onAuthChange } />
                     break
                   case "basic": authEl = <BasicAuth key={ name }
                                                   schema={ schema }
