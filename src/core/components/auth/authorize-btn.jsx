@@ -57,7 +57,7 @@ export default class AuthorizeBtn extends React.Component {
     })
     .catch((error) => {
       console.log("User not authenticated: opening new window to provide Auth")
-      let newWindow = window.open("http://gwa-t.apps.gov.bc.ca/ui/apiKeys", "_blank", "height=800,width=600")
+      let newWindow = window.open("http://gwa-t.apps.gov.bc.ca/ui/apiKeys", "_blank", "height=600px,width=800px")
 
       //Ugly method to poll for when the child window closes
       var windowPollerInterval = window.setInterval(function() {
