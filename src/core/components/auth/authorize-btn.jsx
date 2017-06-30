@@ -6,10 +6,102 @@ export default class AuthorizeBtn extends React.Component {
   }
 
   onClick =() => {
-    let { authActions, authSelectors } = this.props
+    let { authActions, authSelectors, specSelectors } = this.props
     let definitions = authSelectors.definitionsToAuthorize()
 
-    authActions.showDefinitions(definitions)
+    //Check to see if an apikey is present
+    let security = specSelectors.security()
+    let securityDefinitions = specSelectors.securityDefinitions()
+    let apiKeyPresent = false
+    let apiKeySchema = null
+
+    security.valueSeq().forEach( (names) => {
+      names.entrySeq().forEach( ([name, scopes]) => {
+        let definition = securityDefinitions.get(name)
+        if (definition.get("type") === "apiKey") {
+          apiKeyPresent = true
+          apiKeySchema = definition
+        }
+      })
+    })
+
+    if (apiKeyPresent) {
+      //if the key is present, go fetch the key
+      this.fetchBcGwaAuthKey(apiKeySchema)
+    } else {
+      //Otherwise load the definitions normally
+      authActions.showDefinitions(definitions)
+    }
+  }
+
+  fetchBcGwaAuthKey =(apiKeySchema) => {
+    let { authActions } = this.props
+    //fetch runs in it's on 'this' context. so we need to rebind the function here
+    let afterLoginAuth = this.fetchBcGwaAuthKeyAfterLogin
+    fetch("http://gwa-t.apps.gov.bc.ca/rest/apiKeys", {
+      credentials: 'include',
+      mode: 'cors',
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log("Fetch success. JSON to follow")
+      console.log(responseJson);
+      let newState = {
+        "apikey": {
+          "name": "apikey",
+          "schema": apiKeySchema,
+          "value": responseJson.apiKey
+        }
+      }
+      authActions.authorize(newState)
+    })
+    .catch((error) => {
+      console.log("User not authenticated: opening new window to provide Auth")
+      let newWindow = window.open("http://gwa-t.apps.gov.bc.ca/ui/apiKeys", "_blank", "height=600px,width=800px")
+
+      //Ugly method to poll for when the child window closes
+      var windowPollerInterval = window.setInterval(function() {
+        if (newWindow.closed !== false) {
+          window.clearInterval(windowPollerInterval)
+          afterLoginAuth(apiKeySchema)
+        }
+      }, 250)
+    })
+  }
+  
+  fetchBcGwaAuthKeyAfterLogin =(apiKeySchema) => {
+    let { authActions } = this.props
+    console.log("Parent window closed... auth time!")
+
+    fetch("http://gwa-t.apps.gov.bc.ca/rest/apiKeys", {
+      credentials: 'include',
+      mode: 'cors',
+    })
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log("Fetch success. JSON to follow")
+      console.log(responseJson);
+
+      let newState = {
+        "apikey": {
+          "name": "apikey",
+          "schema": apiKeySchema,
+          "value": responseJson.apiKey
+        }
+      }
+      authActions.authorize(newState)
+    })
+    .catch((error) => {
+      console.log("Post login request failed. Set the api-key to something non-sensical")
+      let newState = {
+        "apikey": {
+          "name": "apikey",
+          "schema": apiKeySchema,
+          "value": "bc-gwa-auth-failed"
+        }
+      }
+      authActions.authorize(newState)
+    })
   }
 
   render() {
@@ -22,7 +114,7 @@ export default class AuthorizeBtn extends React.Component {
     return (
       <div className="auth-wrapper">
         <button className={isAuthorized ? "btn authorize locked" : "btn authorize unlocked"} onClick={ this.onClick }>
-          <span>Authorize</span>
+          <span>Get API Key</span>
           <svg width="20" height="20">
             <use xlinkHref={ isAuthorized ? "#locked" : "#unlocked" } />
           </svg>
@@ -38,5 +130,6 @@ export default class AuthorizeBtn extends React.Component {
     authSelectors: PropTypes.object.isRequired,
     errActions: PropTypes.object.isRequired,
     authActions: PropTypes.object.isRequired,
+    specSelectors: PropTypes.object.isRequired,
   }
 }
