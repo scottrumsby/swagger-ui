@@ -29,7 +29,6 @@ export default class Responses extends React.Component {
     let { responses, request, tryItOutResponse, getComponent, specSelectors, fn, producesValue } = this.props
     let defaultCode = defaultStatusCode( responses )
 
-    const ContentType = getComponent( "contentType" )
     const LiveResponse = getComponent( "liveResponse" )
     const Response = getComponent( "response" )
 
@@ -39,13 +38,6 @@ export default class Responses extends React.Component {
       <div className="responses-wrapper">
         <div className="opblock-section-header">
           <h4>Responses</h4>
-            <label>
-              <span>Response content type</span>
-              <ContentType value={producesValue}
-                         onChange={this.onChangeProducesWrapper}
-                         contentTypes={produces}
-                         className="execute-content-type"/>
-                     </label>
         </div>
         <div className="responses-inner">
           {
