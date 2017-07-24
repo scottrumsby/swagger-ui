@@ -38,7 +38,8 @@ export default class AuthorizeBtn extends React.Component {
     let { authActions } = this.props
     //fetch runs in it's on 'this' context. so we need to rebind the function here
     let afterLoginAuth = this.fetchBcGwaAuthKeyAfterLogin
-    fetch("http://gwa-t.apps.gov.bc.ca/rest/apiKeys", {
+    console.log("Fetching the key")
+    fetch("https://gwa.apps.gov.bc.ca/rest/apiKeys", {
       credentials: 'include',
       mode: 'cors',
     })
@@ -57,7 +58,7 @@ export default class AuthorizeBtn extends React.Component {
     })
     .catch((error) => {
       console.log("User not authenticated: opening new window to provide Auth")
-      let newWindow = window.open("http://gwa-t.apps.gov.bc.ca/ui/apiKeys", "_blank", "height=600px,width=800px")
+      let newWindow = window.open("https://gwa.apps.gov.bc.ca/ui/apiKeys", "_blank", "height=600px,width=800px")
 
       //Ugly method to poll for when the child window closes
       var windowPollerInterval = window.setInterval(function() {
@@ -73,7 +74,7 @@ export default class AuthorizeBtn extends React.Component {
     let { authActions } = this.props
     console.log("Parent window closed... auth time!")
 
-    fetch("http://gwa-t.apps.gov.bc.ca/rest/apiKeys", {
+    fetch("https://gwa.apps.gov.bc.ca/rest/apiKeys", {
       credentials: 'include',
       mode: 'cors',
     })
