@@ -27,8 +27,8 @@ export default class BcGwaApiKeyAuth extends React.Component {
   
   fetchApiKey() {
     let { authorizeState, authActions } = this.props
-    fetch("https://www.blameadam.com/api/getToken/", {
-      credentials: "same-origin"
+    fetch("https://gwa-d.apps.gov.bc.ca/rest/apiKeys", {
+      credentials: "include"
     })
     .then((response) => response.json())
     .then((responseJson) => {
@@ -64,7 +64,7 @@ export default class BcGwaApiKeyAuth extends React.Component {
     
     return (
       <div>
-        <iframe src="https://www.blameadam.com/api/admin/login/" style={iframeStyle} frameBorder="0" />
+        <iframe src="http://gwa-d.apps.gov.bc.ca/ui/apiKeys?contentOnly=true" style={iframeStyle} frameBorder="0" />
       </div>
     )
   }
