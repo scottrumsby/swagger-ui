@@ -28,6 +28,7 @@ export default class Auths extends React.Component {
     let { authActions } = this.props
 
     authActions.authorize(this.state)
+    authActions.showDefinitions(false)
   }
   
   authorizeState =(auth) => {

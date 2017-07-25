@@ -64,7 +64,7 @@ export default class BcGwaApiKeyAuth extends React.Component {
     
     return (
       <div>
-        <iframe src="http://gwa-d.apps.gov.bc.ca/ui/apiKeys?contentOnly=true" style={iframeStyle} frameBorder="0" />
+        <iframe src="https://gwa-d.apps.gov.bc.ca/ui/apiKeys?contentOnly=true" style={iframeStyle} frameBorder="0" />
       </div>
     )
   }
