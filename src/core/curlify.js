@@ -9,6 +9,9 @@ export default function curl( request ){
   if ( headers && headers.size ) {
     for( let p of request.get("headers").entries() ){
       let [ h,v ] = p
+      if (h === "accept") {
+        continue
+      }
       type = v
       curlified.push( "-H " )
       curlified.push( `"${h}: ${v}"` )
