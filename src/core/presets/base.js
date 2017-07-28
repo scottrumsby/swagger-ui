@@ -19,6 +19,7 @@ import Auths from "core/components/auth/auths"
 import AuthError from "core/components/auth/error"
 import ApiKeyAuth from "core/components/auth/api-key-auth"
 import BasicAuth from "core/components/auth/basic-auth"
+import BcGwaApiKeyAuth from "core/components/auth/bc-gwa-api-key-auth"
 import Oauth2 from "core/components/auth/oauth2"
 import Clear from "core/components/clear"
 import LiveResponse from "core/components/live-response"
@@ -64,6 +65,7 @@ export default function() {
       oauth2: Oauth2,
       apiKeyAuth: ApiKeyAuth,
       basicAuth: BasicAuth,
+      bcGwaApiKeyAuth: BcGwaApiKeyAuth,
       clear: Clear,
       liveResponse: LiveResponse,
       info: Info,
