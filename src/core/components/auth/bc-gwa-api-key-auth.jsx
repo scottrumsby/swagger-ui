@@ -14,7 +14,7 @@ export default class BcGwaApiKeyAuth extends React.Component {
   constructor(props, context) {
     super(props, context)
     let { name, schema } = this.props
-    let value = "first val"
+    let value = ""
 
     this.state = {
       name: name,
