@@ -51,7 +51,7 @@ export default class Auths extends React.Component {
   }
 
   render() {
-    let { definitions, getComponent, authSelectors, errSelectors } = this.props
+    let { definitions, getComponent, authSelectors, errSelectors, specSelectors } = this.props
     const ApiKeyAuth = getComponent("apiKeyAuth")
     const BcGwaApiKeyAuth = getComponent("bcGwaApiKeyAuth")
     const BasicAuth = getComponent("basicAuth")
@@ -81,6 +81,7 @@ export default class Auths extends React.Component {
                                                     schema={ schema }
                                                     name={ name }
                                                     errSelectors={ errSelectors }
+                                                    specSelectors={ specSelectors }
                                                     authorized={ authorized }
                                                     getComponent={ getComponent }
                                                     onChange={ this.onAuthChange } 
