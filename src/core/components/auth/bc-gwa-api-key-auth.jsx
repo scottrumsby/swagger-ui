@@ -42,7 +42,6 @@ export default class BcGwaApiKeyAuth extends React.Component {
       }
     })
     .catch((error) => {
-        this.setState({apiError: true})
       console.log(error)
       console.log("Dialog open - user not authenticated.")
     })
