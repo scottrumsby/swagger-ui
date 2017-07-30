@@ -28,6 +28,7 @@ export default class Auths extends React.Component {
     let { authActions } = this.props
 
     authActions.authorize(this.state)
+    authActions.showDefinitions(false)
   }
 
   logoutClick =(e) => {
@@ -42,7 +43,7 @@ export default class Auths extends React.Component {
   }
 
   render() {
-    let { definitions, getComponent, authSelectors, errSelectors } = this.props
+    let { definitions, getComponent, authSelectors, errSelectors, specSelectors } = this.props
     const ApiKeyAuth = getComponent("apiKeyAuth")
     const BasicAuth = getComponent("basicAuth")
     const Oauth2 = getComponent("oauth2", true)
@@ -71,6 +72,7 @@ export default class Auths extends React.Component {
                                                     schema={ schema }
                                                     name={ name }
                                                     errSelectors={ errSelectors }
+                                                    specSelectors={ specSelectors }
                                                     authorized={ authorized }
                                                     getComponent={ getComponent }
                                                     onChange={ this.onAuthChange } />
