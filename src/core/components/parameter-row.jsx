@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from "react"
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 import win from "core/window"
-
 
 export default class ParameterRow extends Component {
   static propTypes = {
@@ -94,13 +94,12 @@ export default class ParameterRow extends Component {
             { param.get("name") }
             { !required ? null : <span style={{color: "red"}}>&nbsp;*</span> }
           </div>
-          <div className="parаmeter__type">{ param.get("type") } { itemType && `[${itemType}]` }</div>
+          <div className="parameter__type">{ param.get("type") } { itemType && `[${itemType}]` }</div>
           <div className="parameter__in">({ param.get("in") })</div>
         </td>
 
         <td className="col parameters-col_description">
-          <Markdown options={{html: true, typographer: true, linkify: true, linkTarget: "_blank"}}
-                    source={ param.get("description") }/>
+          <Markdown source={ param.get("description") }/>
           {(isFormData && !isFormDataSupported) && <div>Error: your browser does not support FormData</div>}
 
           { bodyParam || !isExecute ? null
