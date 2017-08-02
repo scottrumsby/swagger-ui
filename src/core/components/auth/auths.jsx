@@ -1,4 +1,5 @@
-import React, { PropTypes } from "react"
+import React from "react"
+import PropTypes from "prop-types"
 import ImPropTypes from "react-immutable-proptypes"
 
 export default class Auths extends React.Component {
@@ -23,7 +24,9 @@ export default class Auths extends React.Component {
   }
 
   submitAuth =(e) => {
-    e.preventDefault()
+    if (e){
+      e.preventDefault()
+    }
 
     let { authActions } = this.props
 
@@ -85,7 +88,8 @@ export default class Auths extends React.Component {
                                                     authorized={ authorized }
                                                     getComponent={ getComponent }
                                                     onChange={ this.onAuthChange } 
-                                                    authorizeState = { this.authorizeState } />
+                                                    authorizeState = { this.authorizeState } 
+                                                    submitAuth = {this.submitAuth} />
                     break
                   case "basic": authEl = <BasicAuth key={ name }
                                                   schema={ schema }
@@ -98,18 +102,35 @@ export default class Auths extends React.Component {
                   default: authEl = <div key={ name }>Unknown security definition type { type }</div>
                 }
 
-                return (<div key={`${name}-jump`}>
-                  { authEl }
-                </div>)
+                let buttonBar
+                if (nonOauthDefinitions.size === authorizedAuth.size) {
+                  if (type == "apiKey") {
+                    buttonBar = <Button className="btn modal-btn auth" onClick={ this.logoutClick }>Unset API Key</Button> 
+                  }
+                  else {
+                    buttonBar = <Button className="btn modal-btn auth" onClick={ this.logoutClick }>Logout</Button> 
+                  }
+                }
+                else {
+                  if (type == "apiKey") {
+                    buttonBar = <h4 class="opblock-title">No key set</h4>
+                  }
+                  else {
+                    buttonBar = <Button type="submit" className="btn modal-btn auth authorize">Authorize</Button>
+                  }
+                }
+                  
+
+                return (
+                  <div key={`${name}-jump`}>
+                    { authEl }                    
+                    <div className="auth-btn-wrapper"> { buttonBar }</div>
+                  </div>
+                )
 
               }).toArray()
             }
-            <div className="auth-btn-wrapper">
-              {
-                nonOauthDefinitions.size === authorizedAuth.size ? <Button className="btn modal-btn auth" onClick={ this.logoutClick }>Logout</Button>
-              : <Button type="submit" className="btn modal-btn auth authorize">Authorize</Button>
-              }
-            </div>
+
           </form>
         }
 

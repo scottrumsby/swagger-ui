@@ -9,11 +9,17 @@ export default class BcGwaApiKeyAuth extends React.Component {
     schema: PropTypes.object.isRequired,
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
-    authorizeState: PropTypes.func,
+    authorizeState: PropTypes.func
   }
 
   constructor(props, context) {
     super(props, context)
+    console.log("this.props")
+    console.log(this.props)
+    console.log("props")
+    console.log(props)
+    console.log("context")
+    console.log(context)
     let { name, schema } = this.props
     let value = ""
 
@@ -24,21 +30,43 @@ export default class BcGwaApiKeyAuth extends React.Component {
       apiError: false
     }
     
-    this.fetchApiKey()
+    //listen for GWA message
+    window.addEventListener('message', this.gwaMessageCallback.bind(this));
   }
-  
+
+  gwaMessageCallback(message) {
+    this.setKey(message.data);
+  }
+
+  setKey(key) {
+    let { authorizeState, submitAuth } = this.props
+    console.log("Obtained an API key: "+key);
+    let newState = Object.assign({}, this.state, { value: key })
+    authorizeState(newState)
+    this.setState(newState);
+
+    submitAuth();
+
+  }
+
   fetchApiKey() {
+    console.log("fetchApiKey");
     let { authorizeState, authActions } = this.props
     fetch("https://gwa-d.apps.gov.bc.ca/rest/apiKeys", {
       credentials: "include"
     })
-    .then((response) => {
-      if (response.status && response.status == 403) {
-        this.setState({apiError: true})
-      } else {
-        let responseJson = response.json()
-        let newState = Object.assign({}, this.state, { value: responseJson.key })
-        authorizeState(newState)
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log(responseJson);
+      if (responseJson && 
+           "data" in responseJson && 
+           responseJson.data.length > 0 &&
+           responseJson.data[0].key) {
+        let key = responseJson.data[0].key;
+        this.setKey(key);
+      }
+      else {
+        console.log("Unable to fetch API key");       
       }
     })
     .catch((error) => {
@@ -47,9 +75,13 @@ export default class BcGwaApiKeyAuth extends React.Component {
     })
   }
 
+
+  componentWillMount() {
+
+  }
+
   componentWillUnmount() {
-    console.log("Unmounting")
-    this.fetchApiKey()
+
   }
 
   render() {
@@ -74,19 +106,11 @@ export default class BcGwaApiKeyAuth extends React.Component {
       height: "400px"
     }
 
-    if (!apiError) {
-      return (
-        <div>
-          <iframe src="https://gwa-d.apps.gov.bc.ca/ui/apiKeys?contentOnly=true" style={iframeStyle} frameBorder="0" />
-        </div>
-      )
-    } else {
-      return (
-        <div>
-          <h4>Forbidden</h4>
-          <p>Please contact {contactName} to request that your github account be associated with the Github group 'bcgov'</p>
-        </div>
-      )
-    }
+    return (
+      <div>
+        <iframe src="https://gwa-d.apps.gov.bc.ca/ui/apiKeys?appName=API%20Console&appSendMessage=true&contentOnly=true" style={iframeStyle} frameBorder="0" />
+      </div>
+    )
+
   }
 }
