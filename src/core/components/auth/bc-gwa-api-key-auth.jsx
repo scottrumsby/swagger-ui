@@ -49,33 +49,6 @@ export default class BcGwaApiKeyAuth extends React.Component {
 
   }
 
-  fetchApiKey() {
-    //console.log("fetchApiKey");
-    let { authorizeState, authActions } = this.props
-    fetch("https://gwa.apps.gov.bc.ca/rest/apiKeys", {
-      credentials: "include"
-    })
-    .then((response) => response.json())
-    .then((responseJson) => {
-      console.log(responseJson);
-      if (responseJson && 
-           "data" in responseJson && 
-           responseJson.data.length > 0 &&
-           responseJson.data[0].key) {
-        let key = responseJson.data[0].key;
-        this.setKey(key);
-      }
-      else {
-        console.log("Unable to fetch API key");       
-      }
-    })
-    .catch((error) => {
-      console.log(error)
-      console.log("Dialog open - user not authenticated.")
-    })
-  }
-
-
   componentWillMount() {
 
   }
