@@ -50,9 +50,9 @@ export default class BcGwaApiKeyAuth extends React.Component {
   }
 
   fetchApiKey() {
-    console.log("fetchApiKey");
+    //console.log("fetchApiKey");
     let { authorizeState, authActions } = this.props
-    fetch("https://gwa-d.apps.gov.bc.ca/rest/apiKeys", {
+    fetch("https://gwa.apps.gov.bc.ca/rest/apiKeys", {
       credentials: "include"
     })
     .then((response) => response.json())
@@ -108,7 +108,7 @@ export default class BcGwaApiKeyAuth extends React.Component {
 
     return (
       <div>
-        <iframe src="https://gwa-d.apps.gov.bc.ca/ui/apiKeys?appName=API%20Console&appSendMessage=true&contentOnly=true" style={iframeStyle} frameBorder="0" />
+        <iframe src="https://gwa.apps.gov.bc.ca/ui/apiKeys?appName=API%20Console&appSendMessage=true&contentOnly=true" style={iframeStyle} frameBorder="0" />
       </div>
     )
 
