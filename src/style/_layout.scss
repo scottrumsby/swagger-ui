@@ -131,6 +131,16 @@
     border-radius: 4px;
     box-shadow: 0 0 3px rgba(#000,.19);
 
+    .try-button-holders
+    {
+        display: flex;
+    }
+
+    .try-out
+    {
+        margin-left: 1em;
+    }
+
     .tab-header
     {
         display: flex;
