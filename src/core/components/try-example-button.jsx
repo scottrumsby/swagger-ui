@@ -19,7 +19,7 @@ export default class TryExampleButton extends React.Component {
     const { onTryExampleClick, onCancelClick, enabled } = this.props
 
     return (
-      <div className="try-out">
+      <div className="try-example">
         {
           enabled ? null
                   : <button className="btn try-out__btn" onClick={ onTryExampleClick }> Try example </button>
