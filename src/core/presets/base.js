@@ -52,7 +52,7 @@ import ObjectModel from "core/components/object-model"
 import ArrayModel from "core/components/array-model"
 import PrimitiveModel from "core/components/primitive-model"
 import TryItOutButton from "core/components/try-it-out-button"
-import TryASampleButton from "core/components/try-a-sample-button"
+import TryExampleButton from "core/components/try-example-button"
 import VersionStamp from "core/components/version-stamp"
 
 import Markdown from "core/components/providers/markdown"
@@ -106,7 +106,7 @@ export default function() {
       ArrayModel,
       PrimitiveModel,
       TryItOutButton,
-      TryASampleButton,
+      TryExampleButton,
       Markdown,
       BaseLayout,
       VersionStamp

@@ -29,22 +29,22 @@ class Parameters extends Component {
     tryItOutEnabled: PropTypes.bool,
     allowTryItOut: PropTypes.bool,
     onTryoutClick: PropTypes.func,
-    onTrySampleClick: PropTypes.func,
+    onTryExampleClick: PropTypes.func,
     onCancelClick: PropTypes.func,
     onChangeKey: PropTypes.array,
     pathMethod: PropTypes.array.isRequired,
-    tryASample: PropTypes.bool
+    tryExample: PropTypes.bool
   }
 
 
   static defaultProps = {
     onTryoutClick: Function.prototype,
-    onTrySampleClick: Function.prototype,
+    onTryExampleClick: Function.prototype,
     onCancelClick: Function.prototype,
     tryItOutEnabled: false,
     allowTryItOut: true,
     onChangeKey: [],
-    tryASample: PropTypes.bool
+    tryExample: PropTypes.bool
   }
 
   onChange = ( param, value, isXml ) => {
@@ -83,7 +83,7 @@ class Parameters extends Component {
 
     let {
       onTryoutClick,
-      onTrySampleClick,
+      onTryExampleClick,
       onCancelClick,
       parameters,
       allowTryItOut,
@@ -96,12 +96,12 @@ class Parameters extends Component {
       oas3Selectors,
       pathMethod,
       operation,
-      tryASample
+      tryExample
     } = this.props
 
     const ParameterRow = getComponent("parameterRow")
     const TryItOutButton = getComponent("TryItOutButton")
-    const TryASampleButton = getComponent("TryASampleButton")
+    const TryExampleButton = getComponent("TryExampleButton")
     const ContentType = getComponent("contentType")
     const Callbacks = getComponent("Callbacks", true)
     const RequestBody = getComponent("RequestBody", true)
@@ -128,7 +128,7 @@ class Parameters extends Component {
             { allowTryItOut ? (
               <div className="try-button-holders">
                 <TryItOutButton enabled={ tryItOutEnabled } onCancelClick={ onCancelClick } onTryoutClick={ onTryoutClick } />
-                <TryASampleButton enabled={ tryItOutEnabled } onCancelClick={ onCancelClick } onTrySampleClick={ onTrySampleClick } />
+                <TryExampleButton enabled={ tryItOutEnabled } onCancelClick={ onCancelClick } onTryExampleClick={ onTryExampleClick } />
               </div>
             ) : null }
         </div>
@@ -154,7 +154,7 @@ class Parameters extends Component {
                         specSelectors={ specSelectors }
                         pathMethod={ pathMethod }
                         isExecute={ isExecute }
-                        tryASample={ tryASample }/>
+                        tryExample={ tryExample }/>
                     )).toArray()
                   }
                 </tbody>

@@ -46,7 +46,7 @@ export default class Operation extends PureComponent {
     super(props, context)
     this.state = {
       tryItOutEnabled: false,
-      tryASample: false
+      tryExample: false
     }
   }
 
@@ -88,14 +88,14 @@ export default class Operation extends PureComponent {
   onTryoutClick =() => {
     this.setState({
       tryItOutEnabled: !this.state.tryItOutEnabled,
-      tryASample: false
+      tryExample: false
     })
   }
 
-  onTrySampleClick =() => {
+  onTryExampleClick =() => {
     this.setState({
       tryItOutEnabled: !this.state.tryItOutEnabled,
-      tryASample: true
+      tryExample: true
     })
   }
 
@@ -103,7 +103,7 @@ export default class Operation extends PureComponent {
     let { specActions, path, method } = this.props
     this.setState({
       tryItOutEnabled: !this.state.tryItOutEnabled,
-      tryASample: false
+      tryExample: false
     })
     specActions.clearValidateParams([path, method])
   }
@@ -166,7 +166,7 @@ export default class Operation extends PureComponent {
       response = response.set("notDocumented", notDocumented)
     }
 
-    let { tryItOutEnabled, tryASample } = this.state
+    let { tryItOutEnabled, tryExample } = this.state
     let shown = this.isShown()
     let onChangeKey = [ path, method ] // Used to add values to _this_ operation ( indexed by path and method )
 
@@ -227,10 +227,10 @@ export default class Operation extends PureComponent {
                 operation={operation}
                 onChangeKey={onChangeKey}
                 onTryoutClick = { this.onTryoutClick }
-                onTrySampleClick = { this.onTrySampleClick }
+                onTryExampleClick = { this.onTryExampleClick }
                 onCancelClick = { this.onCancelClick }
                 tryItOutEnabled = { tryItOutEnabled }
-                tryASample = { tryASample }
+                tryExample = { tryExample }
                 allowTryItOut={allowTryItOut}
 
                 fn={fn}

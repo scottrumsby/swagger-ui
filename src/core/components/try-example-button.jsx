@@ -1,28 +1,28 @@
 import React from "react"
 import PropTypes from "prop-types"
 
-export default class TryASampleButton extends React.Component {
+export default class TryExampleButton extends React.Component {
 
   static propTypes = {
-    onTrySampleClick: PropTypes.func,
+    onTryExampleClick: PropTypes.func,
     onCancelClick: PropTypes.func,
     enabled: PropTypes.bool, // Try it out is enabled, ie: the user has access to the form
   };
 
   static defaultProps = {
-    onTrySampleClick: Function.prototype,
+    onTryExampleClick: Function.prototype,
     onCancelClick: Function.prototype,
     enabled: false,
   };
 
   render() {
-    const { onTrySampleClick, onCancelClick, enabled } = this.props
+    const { onTryExampleClick, onCancelClick, enabled } = this.props
 
     return (
       <div className="try-out">
         {
           enabled ? null
-                  : <button className="btn try-out__btn" onClick={ onTrySampleClick }>Try a sample </button>
+                  : <button className="btn try-out__btn" onClick={ onTryExampleClick }> Try example </button>
         }
       </div>
     )
