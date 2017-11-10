@@ -1,3 +1,16 @@
+
+.authorization-button-wrapper {
+    display: flex;
+
+    padding: 10px 0px;
+
+    justify-content: center;
+
+    position: absolute;
+
+    right: 0px;
+}
+
 .auth-btn-wrapper
 {
     display: flex;
@@ -13,11 +26,15 @@
 
     flex: 1;
     justify-content: flex-end;
+    float: right;
 
     .authorize
     {
         padding-right: 20px;
+        width: -moz-max-content;
     }
+
+    padding-right: 20px;
 }
 
 .auth-container

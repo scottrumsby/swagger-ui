@@ -33,6 +33,7 @@ export default class BaseLayout extends React.Component {
     let Operations = getComponent("operations", true)
     let Models = getComponent("Models", true)
     let AuthorizeBtn = getComponent("authorizeBtn", true)
+    let GwaAuthorizeBtn = getComponent("gwaAuthorizeBtn", true)
     let Row = getComponent("Row")
     let Col = getComponent("Col")
     let Errors = getComponent("errors", true)
@@ -73,7 +74,10 @@ export default class BaseLayout extends React.Component {
                   ) : null }
 
                   { securityDefinitions ? (
-                    <AuthorizeBtn />
+                    <div className="authorization-button-wrapper">
+                      <AuthorizeBtn />
+                      <GwaAuthorizeBtn />
+                    </div>
                   ) : null }
                 </Col>
               </div>

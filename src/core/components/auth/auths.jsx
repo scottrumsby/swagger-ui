@@ -56,7 +56,7 @@ export default class Auths extends React.Component {
   render() {
     let { definitions, getComponent, authSelectors, errSelectors, specSelectors } = this.props
     const ApiKeyAuth = getComponent("apiKeyAuth")
-    const BcGwaApiKeyAuth = getComponent("bcGwaApiKeyAuth")
+    //const BcGwaApiKeyAuth = getComponent("bcGwaApiKeyAuth")
     const BasicAuth = getComponent("basicAuth")
     const Oauth2 = getComponent("oauth2", true)
     const Button = getComponent("Button")
@@ -80,7 +80,7 @@ export default class Auths extends React.Component {
                 let authEl
 
                 switch(type) {
-                  case "apiKey": authEl = <BcGwaApiKeyAuth key={ name }
+                  case "apiKey": authEl = <ApiKeyAuth key={ name }
                                                     schema={ schema }
                                                     name={ name }
                                                     errSelectors={ errSelectors }
@@ -112,12 +112,7 @@ export default class Auths extends React.Component {
                   }
                 }
                 else {
-                  if (type == "apiKey") {
-                    buttonBar = <h4 class="opblock-title">No key set</h4>
-                  }
-                  else {
-                    buttonBar = <Button type="submit" className="btn modal-btn auth authorize">Authorize</Button>
-                  }
+                  buttonBar = <Button type="submit" className="btn modal-btn auth authorize">Authorize</Button>
                 }
                   
 

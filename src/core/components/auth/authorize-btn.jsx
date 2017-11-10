@@ -23,7 +23,7 @@ export default class AuthorizeBtn extends React.Component {
     return (
       <div className="auth-wrapper">
         <button className={isAuthorized ? "btn authorize locked" : "btn authorize unlocked"} onClick={ this.onClick }>
-          <span>Get API Key</span>
+          <span>Enter Existing API Key</span>
           <svg width="20" height="20">
             <use xlinkHref={ isAuthorized ? "#locked" : "#unlocked" } />
           </svg>

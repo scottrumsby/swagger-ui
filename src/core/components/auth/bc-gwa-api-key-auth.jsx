@@ -14,11 +14,6 @@ export default class BcGwaApiKeyAuth extends React.Component {
 
   constructor(props, context) {
     super(props, context)
-    console.log("this.props")
-    console.log(this.props)
-    console.log("props")
-    console.log(props)
-    console.log("context")
     console.log(context)
     let { name, schema } = this.props
     let value = ""
@@ -46,7 +41,6 @@ export default class BcGwaApiKeyAuth extends React.Component {
     this.setState(newState);
 
     submitAuth();
-
   }
 
   componentWillMount() {
